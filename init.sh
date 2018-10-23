@@ -64,7 +64,9 @@ upgrade_system() {
 
 # install packages defined in .travis.yml
 install_packages() {
+  echo $(whereis yay)
   for package in "${CONFIG_PACKAGES[@]}"; do
+    echo "$package"
     yay -S "$package" --noconfirm
   done
 }
@@ -102,6 +104,7 @@ arch_msg "Setting up Arch environment"
 add_repositories
 
 upgrade_system
+echo "Install packages"
 install_packages
 
 if [ -n "$CC" ]; then
